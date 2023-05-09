@@ -21,7 +21,7 @@ const SelectFields = ({ label, name, control, errors, dropdownOptions}) => {
             name={name}
             control={control}
             render={({ field }) => (
-            <TextField {...addErrorIntoField(errors[name])} {...field} required select label={label} variant="filled">
+            <TextField color="secondary" {...addErrorIntoField(errors[name])} {...field} required select label={label} variant="filled">
                 <MenuItem value=''><em>None</em></MenuItem>
                 {dropdownOptions.map(option => (
                 <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>

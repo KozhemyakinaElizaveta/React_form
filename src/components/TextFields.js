@@ -10,7 +10,7 @@ const TextFields = ({ label, inputProps, control, name, errors }) => {
             name={name}
             control={control}
             render={({ field }) => (
-            <TextField {...field} {...addErrorIntoField(errors[name])} required label={label} variant="filled" InputProps={inputProps} />
+            <TextField color="secondary" {...field} {...addErrorIntoField(errors[name])} required label={label} variant="filled" InputProps={inputProps} />
             )}
         />
         {errors[name] ? <ErrorMessage message={errors[name].message} /> : null}

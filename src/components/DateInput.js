@@ -1,5 +1,5 @@
 import React from "react";
-import dayjs from 'dayjs';
+//import dayjs from 'dayjs';
 import { addErrorIntoField } from "../utils";
 import ErrorMessage from "./ErrorMessage";
 import { FormControl} from "@mui/material"
@@ -18,7 +18,7 @@ const DateInput = ({ label, name, control, errors}) => {
             control={control}
             render={({ field }) => (
                 <DatePicker
-                defaultValue={dayjs('2022-04-17')}
+                color="secondary"
                 slotProps={{ textField: { variant: 'filled' } }}
                 {...addErrorIntoField(errors[name])}{...field} required select label={label}
                 />

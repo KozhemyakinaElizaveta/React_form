@@ -1,3 +1,4 @@
+import React from "react";
 import { Avatar, Box, Button, Typography } from "@mui/material"
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import TextFields from "../components/TextFields";
@@ -7,6 +8,7 @@ import TimeInput from "../components/TimeInput";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+//import { type } from "@testing-library/user-event/dist/type";
 
 
 const options_tower = [
@@ -48,9 +50,10 @@ const schema = yup.object({
     room: yup.string().required('Room selection is required'),
     date: yup.string().required('Date selection is required'),
     time: yup.string().required('Time selection is required'),
-    });
+});
 
-    const RegisterForm = () => {
+
+const RegisterForm = () => {
     const {reset, handleSubmit, formState: { errors }, control } = useForm({
         defaultValues: {
         tower: '',
@@ -64,9 +67,13 @@ const schema = yup.object({
     });
 
     const onSubmit = (data) => {
-        console.log(data);
+        console.log('data', data);
         reset();
     }
+
+    const onError = () => {
+        console.log('wrong');
+    };
 
     return (
         <Box sx={{
@@ -81,7 +88,7 @@ const schema = yup.object({
         <Typography component='h1'>Booking a meeting room</Typography>
 
         {/* Form */}
-        <form noValidate component='form' onSubmit={handleSubmit(onSubmit)} sx={{width: '100%', mt: '2rem' }}>
+        <form noValidate component='form' sx={{width: '100%', mt: '2rem' }}>
             <SelectFields errors={errors} control={control} name='tower' label='Select a tower' dropdownOptions={options_tower}/>
             <SelectFields errors={errors} control={control} name='floor' label='Select floor' dropdownOptions={options_floor}/>
             <SelectFields errors={errors} control={control} name='room' label='Select room number' dropdownOptions={options_room}/>
@@ -92,9 +99,22 @@ const schema = yup.object({
             <Button
             type="comfirm"
             fullWidth
+            color = "secondary"
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
+            onClick={(e) => {
+                handleSubmit(onSubmit, onError)(e);
+            }}
+            onSubmit={handleSubmit(onSubmit)}
             >Confirm</Button>
+            <Button
+            type="reset"
+            color = "secondary"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 0.5, mb: 2 }}
+            //onClick={onClear}
+            >Reset</Button>
         </form>
         </Box>
     )
